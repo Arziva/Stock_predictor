@@ -21,7 +21,7 @@ user_input = st.text_input('Enter stock Ticker', 'ASHOKLEY.NS')
 
 start = datetime.datetime(2009,1,1)
 end = datetime.datetime(2023,1,1)
-df = yf.download('user_input', start=start, end=end)
+df = yf.download(user_input, start=start, end=end, interval='1d', progress=False)["Adj Close"]
 
 #describe data
 st.subheader("Data from 2010 - 2019")
