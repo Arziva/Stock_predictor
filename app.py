@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
 import pandas_datareader as data #scrape
+import tensorflow as tf
 from keras.models import load_model
 import yfinance as yf
 yf.pdr_override()
@@ -17,7 +18,7 @@ end = '2020-12-31'
 #stocks = ["stock1","stock2", ...]
 st.title('Stock Trend Predictor')
 
-user_input = st.text_input('Enter stock Ticker', 'ASHOKLEY.NS')
+user_input = st.text_input('Enter stock Ticker', 'AAPL')
 
 start = datetime.datetime(2009,1,1)
 end = datetime.datetime(2023,1,1)
@@ -68,7 +69,8 @@ data_training_array = scaler.fit_transform(data_training)
 
 
 #loading LSTM model bruh.. Arun.. try not to sleep..
-model = load_model('stock_arun.h5')
+model = tf.keras.models.load_model('stock_arun.h5')
+#model = load_model('stock_arun.h5')
 
 
 
@@ -106,3 +108,4 @@ plt.xlabel('Time')
 plt.ylabel('Price')
 plt.legend()
 st.pyplot(fig2)
+
