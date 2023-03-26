@@ -19,6 +19,7 @@ end = datetime.datetime(2023,1,1)
 df = yf.download('ASHOKLEY.NS', start=start, end=end)
 df.head()
 
+
 df.tail()
 
 df = df.reset_index()

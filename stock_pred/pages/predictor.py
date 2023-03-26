@@ -2,21 +2,22 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
 import pandas_datareader as data #scrape
-import tensorflow as tf
 from keras.models import load_model
 import yfinance as yf
 yf.pdr_override()
 import streamlit as st
+import tensorflow as tf
 
 import datetime
-start = '2009-01-01'
-end = '2020-12-31'
+# start = '2009-01-01'
+# end = '2020-12-31'
 
 #df = data.DataReader('AAPL','yahoo', start, end)
 #df.head()
 
 #stocks = ["stock1","stock2", ...]
-st.title('Stock Trend Predictor')
+
+st.title('Stock Predictor')
 
 user_input = st.text_input('Enter stock Ticker', 'AAPL')
 
@@ -25,7 +26,7 @@ end = datetime.datetime(2023,1,1)
 df = yf.download(user_input, start=start, end=end)
 
 #describe data
-st.subheader("Data from 2010 - 2019")
+st.subheader("Data from 2009 - 2023")
 st.write(df.describe())
 
 #visualizations
@@ -69,11 +70,12 @@ data_training_array = scaler.fit_transform(data_training)
 
 
 #loading LSTM model bruh.. Arun.. try not to sleep..
-model = tf.keras.models.load_model('stock_arun.h5')
+model = tf.keras.models.load_model('/Users/arunkumar/Desktop/Projects/stock_pred/pages/stock_arun.h5')
 #model = load_model('stock_arun.h5')
+print(model.summary())
+
 
 #testing here..
-
 past_100_days = data_training.tail(100)
 final_df = past_100_days.append(data_testing, ignore_index = True)
 input_data = scaler.fit_transform(final_df)
@@ -107,3 +109,6 @@ plt.ylabel('Price')
 plt.legend()
 st.pyplot(fig2)
 
+#from sklearn.metrics import accuracy_score
+#print(accuracy_score(y_test, model.predict(xtest)))
+#print(accuracy_score(y_test, y_predicted))
