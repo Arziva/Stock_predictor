@@ -72,8 +72,6 @@ data_training_array = scaler.fit_transform(data_training)
 model = tf.keras.models.load_model('stock_arun.h5')
 #model = load_model('stock_arun.h5')
 
-
-
 #testing here..
 
 past_100_days = data_training.tail(100)
